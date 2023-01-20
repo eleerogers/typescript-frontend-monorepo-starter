@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@mono/core'
 import { togglePlaceholder } from '@mono/ui'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
+import { getItems, postItems } from '@mono/api'
 import React from 'react'
 
 export const Placeholder = (): JSX.Element => {
@@ -9,14 +10,17 @@ export const Placeholder = (): JSX.Element => {
   const { showPlaceholder } = useAppSelector((state) => state.ui)
 
   const queryClient = useQueryClient()
-  const { isLoading, error, data, refetch } = useQuery<unknown[]>(
-    ['queryKey'],
-    async () => {
-      const response = await fetch('http://localhost:3000/api/v1/')
-      if (!response.ok) throw new Error('Server connection error')
-      return (await response.json()) as unknown[]
-    }
-  )
+  const { isLoading, error, data, refetch } = useQuery<unknown[]>({
+    queryKey: ['items'],
+    queryFn: getItems,
+  })
+
+  const mutation = useMutation<unknown[]>({
+    mutationFn: postItems,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['items'] })
+    },
+  })
 
   return (
     <div className="m-5 text-xl text-center">

@@ -1,20 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import type { UIState } from './'
+import type { RootState } from '@mono/core'
+import type { UIState } from '.'
 
 const initialState = {
-  activeBand: 1,
+  showPlaceholder: true,
 }
 
 export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setActiveBand: (state: UIState, action: PayloadAction<number>) => {
-      state.activeBand = action.payload
+    togglePlaceholder: (
+      state: UIState,
+      action: PayloadAction<boolean | undefined>
+    ) => {
+      state.showPlaceholder = action.payload ?? !state.showPlaceholder
     },
   },
 })
 
-export const { setActiveBand } = uiSlice.actions
+export const selectUI = (state: RootState): UIState => state.ui
 export const uiReducer = uiSlice.reducer
+export const { togglePlaceholder } = uiSlice.actions

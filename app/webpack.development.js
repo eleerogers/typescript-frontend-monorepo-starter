@@ -24,6 +24,7 @@ const config = merge(baseConfig, {
     hot: true,
     liveReload: true,
     open: false,
+    allowedHosts: 'all', // uncomment to deploy on online code editors e.g. codesandbox
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',

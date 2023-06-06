@@ -1,4 +1,4 @@
-import React, { JSX, useEffect } from 'react'
+import React, { JSX } from 'react'
 
 interface Props {
   index: number
@@ -16,10 +16,10 @@ export const Star = ({
   setHoverRating,
 }: Props): JSX.Element => {
   const currRating = hoverRating ? hoverRating : rating
-  const starOn = currRating && index <= currRating;
+  const starOn = currRating && index <= currRating
   const clickCurrRating = index === rating
   const setClickTo = clickCurrRating ? null : index
-  
+
   return (
     <div className="inline-block m-3 text-4xl font-bold text-center star">
       <button

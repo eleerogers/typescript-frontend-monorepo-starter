@@ -4,3 +4,24 @@ html {
 }
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+#App {
+    margin-top: 4em;
+    text-align: center;
+}
+
+.stopwatch {
+    text-align: left;
+    font-family: monospace;
+    font-size: 1.3em;
+}
+
+.stopwatch_container {
+    width: 690px;
+    margin: auto;
+    padding: 3em 0 3em;
+}
+
+button {
+    min-width: 90px;
+}
